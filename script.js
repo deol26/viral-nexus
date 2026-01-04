@@ -164,18 +164,22 @@ function renderLinks() {
 }
 
 function getRelevantThumbnail(link) {
-    // If link has a custom thumbnail that's not a random picsum photo, use it
+    // Use the new deterministic image selector if available
+    if (typeof window !== 'undefined' && window.imageSelector) {
+        const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const result = window.imageSelector.selectPreviewImage(link, null, { debug: isDev });
+        return result.imageUrl;
+    }
+    
+    // Fallback to legacy behavior if imageSelector not loaded
     if (link.thumbnail && !link.thumbnail.includes('picsum.photos')) {
         return link.thumbnail;
     }
     
-    // Get the primary keyword or first keyword
     const keyword = link.keywords && link.keywords.length > 0 
         ? link.keywords[0] 
         : link.category;
     
-    // Use Unsplash Source for relevant images based on keyword
-    // Format: https://source.unsplash.com/250x150/?keyword
     const searchTerm = encodeURIComponent(keyword.toLowerCase());
     return `https://source.unsplash.com/250x150/?${searchTerm}`;
 }
