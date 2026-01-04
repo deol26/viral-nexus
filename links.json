@@ -102,24 +102,31 @@
     "category": "products",
     "clicks": 550000,
     "createdAt": "2025-12-31T00:00:00Z"
-     },
-  {
-    "id": 13,
-    "title": "19 minutes wali video",
-    "url": "https://www.mckinsey.com/featured-insights/mckinsey-global-survey-on-economic-conditions",
-    "description": "viral 19 mins video access free link.",
-    "category": "instagram viral",
-    "tags": ["19 minutes", "viral video", "19 minutes"],
-    "date": "2026-01-04"
   },
   {
-    "id": 12,
+    "id": "13",
+    "title": "19 minutes wali video",
+    "url": "https://www.mckinsey.com/featured-insights/mckinsey-global-survey-on-economic-conditions",
+    "description": "Viral 19-minute video — free access link.",
+    "thumbnail": "https://picsum.photos/250/150?random=9",
+    "source": "Instagram",
+    "viralScore": 76,
+    "keywords": ["19 minutes", "viral video", "Instagram"],
+    "category": "videos",
+    "clicks": 300000,
+    "createdAt": "2026-01-04T00:00:00Z"
+  },
+  {
+    "id": "12",
     "title": "Lottery future draws prediction",
     "url": "https://deol26.github.io/nextdraws-com/",
-    "description": "Us mega millions,Euro dreams,Oz lotto,Uae fast 5.",
-    "category": "lottery predictor",
-    "tags": ["Us mega millions,Euro dreams,Oz lotto,Uae fast 5,All furure draws"],
-    "date": "2026-01-04"
+    "description": "Predictions and next-draw forecasts for Mega Millions, Euro Dreams, Oz Lotto and other lotteries.",
+    "thumbnail": "https://picsum.photos/250/150?random=10",
+    "source": "NextDraws",
+    "viralScore": 68,
+    "keywords": ["lottery", "predictions", "Mega Millions", "Oz Lotto"],
+    "category": "tools",
+    "clicks": 120000,
+    "createdAt": "2026-01-04T00:00:00Z"
   }
-  ]
-
+]
