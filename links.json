@@ -4,7 +4,7 @@
     "title": "World Reacts to US Military Action in Venezuela",
     "url": "https://www.aljazeera.com/news/2026/1/3/world-reacts-to-reported-us-bombing-of-venezuela",
     "description": "Global leaders respond as reports emerge of US strikes in Venezuela.",
-    "thumbnail": "https://picsum.photos/250/150?random=1",
+    "thumbnail": "images/venzu.avif",
     "source": "Al Jazeera",
     "viralScore": 95,
     "keywords": ["Venezuela", "Geopolitics", "Breaking"],
@@ -130,6 +130,7 @@
     "createdAt": "2026-01-04T00:00:00Z"
   }
 ]
+
 
 
 
