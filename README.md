@@ -11,6 +11,7 @@ This website loads viral content from a **links.json** file instead of requiring
 - **Homepage Grid**: Displays trending content in a responsive card layout
 - **Category Filtering**: Browse by content type (Tweets, News, Videos, Products, Memes)
 - **Intelligent Search**: Search by title, keywords, or category
+- **Smart Image Selection**: Deterministic, relevance-based preview images that match content
 - **Keyword Tags**: Clickable tags for related content discovery
 - **Dark Mode**: Toggle between light and dark themes
 - **Infinite Scroll**: Load more content dynamically
@@ -80,6 +81,60 @@ git push origin main
 ✅ **Fast Deployment** - Push to GitHub and you're done
 ✅ **No Server Required** - Pure client-side
 
+## 🖼️ Smart Image Selection
+
+Viral Nexus uses an intelligent, deterministic image selection algorithm to choose the most relevant preview images for each link:
+
+### How It Works
+
+The image selector analyzes your link's metadata (title, keywords) and scores each available image based on:
+- **Filename/URL matching** (60% weight): Images with URLs containing keywords from the title
+- **Alt text/caption matching** (30% weight): Images with descriptive text matching the content
+- **Keyword tag matches** (40% weight): Direct matches with link keywords
+- **Resolution bonus** (10% weight): Preference for higher quality images
+
+### Fallback Chain
+
+When no image scores above the relevance threshold, the system falls back to:
+1. Best-scored image from the images array
+2. `og:image` from meta tags
+3. `twitter:image` from meta tags
+4. First available image
+5. Category-specific placeholder
+
+### Adding Image Metadata
+
+To improve image selection, you can add an `images` array to your links:
+
+```json
+{
+  "id": "1",
+  "title": "Venezuela Breaking News",
+  "url": "https://example.com/article",
+  "keywords": ["Venezuela", "Politics"],
+  "images": [
+    {
+      "url": "https://example.com/venezuela-protest-2026.jpg",
+      "alt": "Venezuela protest scene",
+      "caption": "Protesters in Caracas",
+      "width": 800,
+      "height": 600
+    }
+  ],
+  "meta": {
+    "ogImage": "https://example.com/og-image.jpg",
+    "twitterImage": "https://example.com/twitter-card.jpg"
+  }
+}
+```
+
+### Benefits
+
+- ✅ **Deterministic**: Same input always produces the same output
+- ✅ **Relevant**: Images match your content semantically
+- ✅ **Cached**: Results are cached for performance
+- ✅ **Backward Compatible**: Works with existing `thumbnail` field
+
 ## Getting Started
 
 ### User Interface
@@ -123,6 +178,12 @@ viral-nexus/
 ├── style.css       # Homepage CSS styles
 ├── script.js       # Homepage JavaScript functionality
 ├── links.json      # Viral content data (EDIT THIS!)
+├── src/
+│   └── utils/
+│       └── imageSelector.js  # Smart image selection utility
+├── tests/
+│   ├── imageSelector.test.js  # Unit tests
+│   └── test-runner.html       # Browser test runner
 ├── admin.html      # Admin panel (optional - can be removed)
 ├── admin.css       # Admin panel CSS (optional)
 ├── admin.js        # Admin panel JS (optional)
@@ -145,6 +206,25 @@ npx http-server
 ```
 
 Then visit `http://localhost:8000`
+
+## 🧪 Testing
+
+The image selection algorithm includes comprehensive unit tests:
+
+```bash
+# Run tests in Node.js
+node tests/imageSelector.test.js
+
+# Or open in browser
+open tests/test-runner.html
+```
+
+Tests cover:
+- Text tokenization and normalization
+- Jaccard similarity calculations
+- Image scoring based on multiple factors
+- Fallback behavior
+- Caching and deterministic selection
 
 ## ❓ Troubleshooting
 
