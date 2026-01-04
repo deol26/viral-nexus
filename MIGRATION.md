@@ -1,165 +1,163 @@
-# Migration Summary: Admin Panel → JSON File Management
+# Image Selection Migration Guide
 
-## What Changed
+## Overview
 
-### ❌ Removed (No Longer Needed)
-- `admin.html` - Admin panel interface (optional, can be deleted)
-- `admin.css` - Admin panel styles (optional, can be deleted)
-- `admin.js` - Admin panel logic (optional, can be deleted)
-- localStorage dependencies
-- Seed data functions
-- Complex storage management
+Viral Nexus now uses an intelligent, deterministic image selection algorithm instead of random image selection. This document explains the changes and how to use the new features.
 
-### ✅ Added
-- `links.json` - Single source of truth for all viral content
-- Simplified `script.js` - Now fetches from JSON instead of localStorage
-- Updated `README.md` - Instructions for JSON-based workflow
+## What Changed?
 
-### 🔄 Modified
-- `script.js` - Simplified from 373 lines to ~250 lines
-  - Removed localStorage functions
-  - Removed seed data generation
-  - Added JSON fetch functionality
-  - Cleaner error handling
+### Before
+- Images were selected randomly from Unsplash based on the first keyword
+- No consistency - same link could show different images on each page load
+- No relevance matching - images didn't necessarily match the content
 
-## How It Works Now
+### After
+- Images are scored based on relevance to link title and keywords
+- Deterministic - same link always shows the same image
+- Multiple fallback options for better coverage
+- Cached for performance
 
-### Before (Admin Panel Approach)
-1. Open admin.html
-2. Login to admin panel
-3. Add links through web interface
-4. Data stored in browser's localStorage
-5. Data lost if localStorage is cleared
-6. Can't share data between devices/browsers
+## How It Works
 
-### After (JSON File Approach)
-1. Edit `links.json` in any text editor
-2. Commit and push to GitHub
-3. Data stored in version control
-4. Automatic deployment via GitHub Pages
-5. Data synced across all devices
-6. Full version history tracked
+### Scoring Algorithm
 
-## Benefits
+The system analyzes each image candidate and assigns a score based on:
 
-| Feature | Admin Panel | JSON File |
-|---------|-------------|-----------|
-| **Simplicity** | Complex UI | Just edit a file |
-| **Backup** | Manual export | Automatic (Git) |
-| **Version Control** | ❌ | ✅ Git history |
-| **Collaboration** | ❌ Single user | ✅ Multiple contributors |
-| **Data Loss Risk** | High (localStorage) | Low (Git) |
-| **Deployment** | Manual | Automatic (GitHub Pages) |
-| **Learning Curve** | Steep | Minimal |
-| **Server Required** | ❌ | ❌ |
-| **Database Required** | ❌ | ❌ |
+1. **Filename/URL Matching (60%)**: Does the image URL contain words from the title or keywords?
+2. **Alt Text Matching (30%)**: Does the alt text or caption match the content?
+3. **Keyword Tags (40%)**: Direct matches with link keywords
+4. **Resolution Bonus (10%)**: Preference for higher quality images (>100k pixels)
 
-## Example: Adding Content
+### Fallback Chain
 
-### JSON File Method (Current)
-```bash
-# 1. Edit links.json
-nano links.json  # or any editor
+If no image scores above the threshold (0.1), the system falls back to:
 
-# 2. Add new entry
-{
-  "id": "9",
-  "title": "New Viral Trend 2026",
-  "url": "https://example.com/trend",
-  "category": "videos",
-  "keywords": ["Trend", "2026"]
-}
+1. Best-scored image from the images array
+2. `og:image` from meta tags
+3. `twitter:image` from meta tags  
+4. First available image in the array
+5. Category-specific placeholder
 
-# 3. Push to GitHub
-git add links.json
-git commit -m "Add new viral trend"
-git push
+## Using the New Features
 
-# Done! Site updates in 2-5 minutes
-```
+### Basic Usage (Existing Links)
 
-### Admin Panel Method (Old)
-1. Open admin.html
-2. Click "Add Link" tab
-3. Fill out 10+ form fields
-4. Click submit
-5. Data only in your browser
-6. Need to export/import to share
-7. Risk losing data if browser storage cleared
-
-## Migration Steps (If You Want to Switch)
-
-If you currently use the admin panel and want to switch:
-
-1. **Export your data**
-   - Open admin.html
-   - Go to "Bulk Upload" tab
-   - Click "Export JSON"
-   - Save as `links.json`
-
-2. **Update your workflow**
-   - Use the new `links.json` file
-   - Edit directly or use any JSON editor
-   - Commit to Git for version control
-
-3. **Optional: Remove admin files**
-   ```bash
-   rm admin.html admin.css admin.js
-   git commit -m "Remove admin panel - using JSON now"
-   ```
-
-## JSON File Structure
-
-Your `links.json` should be an array of objects:
+No changes required! The system works with your existing `links.json` structure:
 
 ```json
-[
-  {
-    "id": "1",
-    "title": "Example Title",
-    "url": "https://example.com",
-    "description": "Description here",
-    "thumbnail": "https://image-url.com",
-    "source": "Source Name",
-    "viralScore": 95,
-    "keywords": ["tag1", "tag2"],
-    "category": "news",
-    "clicks": 1000000,
-    "createdAt": "2026-01-04T00:00:00Z"
-  }
-]
+{
+  "id": "1",
+  "title": "Venezuela Breaking News",
+  "url": "https://example.com/article",
+  "thumbnail": "https://picsum.photos/250/150?random=1",
+  "keywords": ["Venezuela", "Politics"]
+}
 ```
 
-## Tools to Help
+The `thumbnail` field is still supported for backward compatibility.
 
-### JSON Validators
-- https://jsonlint.com - Validate JSON syntax
-- https://jsonformatter.org - Format and validate
+### Enhanced Usage (Recommended)
 
-### JSON Editors
-- VS Code - Best for developers
-- JSONEditor Online - Web-based GUI
-- Any text editor works!
+For better image selection, add an `images` array with metadata:
 
-### Git GUIs (if you prefer not using command line)
-- GitHub Desktop
-- GitKraken
-- SourceTree
+```json
+{
+  "id": "1",
+  "title": "Venezuela Breaking News",
+  "url": "https://example.com/article",
+  "keywords": ["Venezuela", "Politics", "Breaking"],
+  "images": [
+    {
+      "url": "https://example.com/venezuela-protest-2026.jpg",
+      "alt": "Venezuela protest scene in Caracas",
+      "caption": "Protesters gather in the capital",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "url": "https://example.com/other-photo.jpg",
+      "alt": "Related image"
+    }
+  ],
+  "meta": {
+    "ogImage": "https://example.com/og-image.jpg",
+    "twitterImage": "https://example.com/twitter-card.jpg"
+  }
+}
+```
+
+### Tips for Best Results
+
+1. **Use descriptive filenames**: `venezuela-protest-2026.jpg` is better than `img123.jpg`
+2. **Add alt text**: Helps the algorithm understand image content
+3. **Include metadata**: Higher resolution images get a small score boost
+4. **Match keywords**: Images with URLs/alt text matching your keywords score higher
+
+## Debugging
+
+When running on localhost, the system logs debug information to the console:
+
+```javascript
+[imageSelector] Link tokens: [venezuela, breaking, news, politics]
+[imageSelector] Found candidates: 3
+[imageSelector] Top 3 candidates: [...]
+[imageSelector] Selected: {imageUrl: "...", reason: "scored_match", score: 0.45}
+```
+
+The `reason` field explains why an image was chosen:
+- `scored_match (linkJson)` - Image matched based on scoring
+- `fallback_og_image` - Used Open Graph image
+- `fallback_twitter_image` - Used Twitter card image
+- `fallback_first_image` - Used first available image
+- `fallback_placeholder` - No images available, used placeholder
+
+## Performance
+
+### Caching
+
+Selection results are cached in memory. The cache is keyed by the link URL, so repeated renders of the same link don't require re-scoring.
+
+Cache statistics are available via:
+```javascript
+window.imageSelector.getCacheStats()
+// Returns: { size: 10, keys: [...] }
+```
+
+Clear the cache if needed:
+```javascript
+window.imageSelector.clearCache()
+```
+
+## Testing
+
+Run the comprehensive test suite:
+
+```bash
+# Node.js
+node tests/imageSelector.test.js
+
+# Browser
+open tests/test-runner.html
+```
+
+All 19 tests should pass.
+
+## Migration Checklist
+
+- [ ] Review your existing links.json entries
+- [ ] Add `images` array to high-priority links (optional but recommended)
+- [ ] Include descriptive filenames and alt text
+- [ ] Test locally with debug logging enabled
+- [ ] Deploy and verify images are more relevant
+- [ ] Monitor cache performance
+
+## Backward Compatibility
+
+✅ Existing `thumbnail` field continues to work  
+✅ No breaking changes to the API  
+✅ Graceful degradation if imageSelector.js fails to load  
+✅ All existing links render correctly without modification
 
 ## Questions?
 
-**Q: Can I still use the admin panel?**
-A: Yes! The admin files are still there. But the site now reads from `links.json`, so admin panel changes won't persist unless you export to JSON.
-
-**Q: What if I don't want to use Git?**
-A: You can still edit `links.json` locally and host anywhere (not just GitHub Pages).
-
-**Q: Can I automate content updates?**
-A: Yes! You can use GitHub Actions, Zapier, or any automation tool to update `links.json`.
-
-**Q: Is this approach scalable?**
-A: For thousands of links, yes. For millions, consider a proper database.
-
----
-
-**Congratulations! Your site is now simpler and easier to maintain! 🎉**
+See the main README.md for more details about the scoring algorithm and feature set.
