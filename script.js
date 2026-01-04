@@ -130,11 +130,11 @@ function renderLinks() {
         const item = document.createElement('div');
         item.className = 'link-item';
         item.dataset.category = link.category;
-        const thumbnail = link.thumbnail || getPlaceholderImage(link.category);
+        const thumbnail = getRelevantThumbnail(link);
         item.innerHTML = `
             <div class="link-rank">${rank}</div>
             <div class="link-thumbnail">
-                <img src="${thumbnail}" alt="${link.title}" loading="lazy">
+                <img src="${thumbnail}" alt="${link.title}" loading="lazy" onerror="this.src='${getPlaceholderImage(link.category)}'">
             </div>
             <div class="link-content">
                 <h3 class="link-title"><a href="${link.url}" target="_blank" rel="noopener">${link.title}</a></h3>
@@ -161,6 +161,23 @@ function renderLinks() {
 
     const loadMoreBtn = document.getElementById('load-more');
     loadMoreBtn.style.display = state.filtered.length > state.visible ? 'block' : 'none';
+}
+
+function getRelevantThumbnail(link) {
+    // If link has a custom thumbnail that's not a random picsum photo, use it
+    if (link.thumbnail && !link.thumbnail.includes('picsum.photos')) {
+        return link.thumbnail;
+    }
+    
+    // Get the primary keyword or first keyword
+    const keyword = link.keywords && link.keywords.length > 0 
+        ? link.keywords[0] 
+        : link.category;
+    
+    // Use Unsplash Source for relevant images based on keyword
+    // Format: https://source.unsplash.com/250x150/?keyword
+    const searchTerm = encodeURIComponent(keyword.toLowerCase());
+    return `https://source.unsplash.com/250x150/?${searchTerm}`;
 }
 
 function formatTimeAgo(dateInput) {
