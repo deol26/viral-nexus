@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Selector Tests</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        #results {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        .pass { color: #28a745; }
+        .fail { color: #dc3545; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Selector Unit Tests</h1>
+    <button onclick="runTestsInBrowser()">Run Tests</button>
+    <div id="results">Click "Run Tests" to start...</div>
+
+    <script src="../src/utils/imageSelector.js"></script>
+    <script src="imageSelector.test.js"></script>
+    <script>
+        function runTestsInBrowser() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = 'Running tests...\n';
+            
+            // Capture console output
+            const originalLog = console.log;
+            const originalError = console.error;
+            let output = '';
+            
+            console.log = (...args) => {
+                output += args.join(' ') + '\n';
+                originalLog(...args);
+            };
+            
+            console.error = (...args) => {
+                output += args.join(' ') + '\n';
+                originalError(...args);
+            };
+            
+            // Run tests
+            try {
+                const success = window.ImageSelectorTests.runTests();
+                
+                // Restore console
+                console.log = originalLog;
+                console.error = originalError;
+                
+                // Display results
+                resultsDiv.innerHTML = output;
+                
+                if (success) {
+                    resultsDiv.innerHTML += '\n<span class="pass">All tests passed! ✓</span>';
+                } else {
+                    resultsDiv.innerHTML += '\n<span class="fail">Some tests failed ✗</span>';
+                }
+            } catch (error) {
+                console.log = originalLog;
+                console.error = originalError;
+                resultsDiv.innerHTML = output + '\n<span class="fail">Error running tests: ' + error.message + '</span>';
+            }
+        }
+    </script>
+</body>
+</html>

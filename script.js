@@ -164,7 +164,23 @@ function renderLinks() {
 }
 
 function getRelevantThumbnail(link) {
-    // If link has a custom thumbnail that's not a random picsum photo, use it
+    // Use deterministic image selector
+    if (typeof window !== 'undefined' && window.ImageSelector) {
+        const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const selection = window.ImageSelector.selectPreviewImage(link, null, {
+            isDevelopment: isDevelopment,
+            useCache: true
+        });
+        
+        // If we got a valid image URL, use it
+        if (selection.imageUrl) {
+            return selection.imageUrl;
+        }
+        
+        // Otherwise fall through to legacy behavior
+    }
+    
+    // Legacy fallback: If link has a custom thumbnail that's not a random picsum photo, use it
     if (link.thumbnail && !link.thumbnail.includes('picsum.photos')) {
         return link.thumbnail;
     }
