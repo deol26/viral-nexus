@@ -108,7 +108,7 @@
     "title": "19 minutes wali video",
     "url": "https://www.mckinsey.com/featured-insights/mckinsey-global-survey-on-economic-conditions",
     "description": "Viral 19-minute video — free access link.",
-    "thumbnail": "https://picsum.photos/250/150?random=9",
+    "thumbnail": "images/images.jpg",
     "source": "Instagram",
     "viralScore": 76,
     "keywords": ["19 minutes", "viral video", "Instagram"],
@@ -121,7 +121,7 @@
     "title": "Lottery future draws prediction",
     "url": "https://deol26.github.io/nextdraws-com/",
     "description": "Predictions and next-draw forecasts for Mega Millions, Euro Dreams, Oz Lotto and other lotteries.",
-    "thumbnail": "images/lottery-prediction.jpg",
+    "thumbnail": "images/lotto.jpg",
     "source": "NextDraws",
     "viralScore": 68,
     "keywords": ["lottery", "predictions", "Mega Millions", "Oz Lotto"],
@@ -130,3 +130,4 @@
     "createdAt": "2026-01-04T00:00:00Z"
   }
 ]
+
