@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Nexus - Discover Viral Content</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="description" content="Unlimited-capacity content aggregator for viral videos, products, news, tweets, and memes.">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Viral Nexus</h1>
+            <nav>
+                <input type="text" id="search-bar" placeholder="Search viral content...">
+                <button id="search-btn">Search</button>
+                <button id="login-btn">Login</button>
+                <button id="dark-mode-toggle">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="container">
+                <h2>Discover the Latest Viral Content</h2>
+                <div id="categories">
+                    <button class="category-btn active" data-category="all">🔥 All Trending</button>
+                    <button class="category-btn" data-category="news">📰 Breaking News</button>
+                    <button class="category-btn" data-category="tweets">🐦 Viral Tweets</button>
+                    <button class="category-btn" data-category="videos">🎬 Top Videos</button>
+                    <button class="category-btn" data-category="products">🛍️ Viral Products</button>
+                    <button class="category-btn" data-category="memes">😂 Hot Memes</button>
+                </div>
+                
+                <!-- Text-only link list -->
+                <div id="link-list"></div>
+                
+                <button id="load-more">Load More Viral Links</button>
+            </div>
+        </section>
+
+        <aside id="sidebar">
+            <h3>🔥 Trending Keywords</h3>
+            <div id="keyword-heatmap">
+                <span class="heatmap-keyword large">Venezuela</span>
+                <span class="heatmap-keyword large">AI</span>
+                <span class="heatmap-keyword medium">TikTok</span>
+                <span class="heatmap-keyword medium">Skincare</span>
+                <span class="heatmap-keyword small">ElonMusk</span>
+                <span class="heatmap-keyword small">Memes</span>
+                <span class="heatmap-keyword medium">YouTube</span>
+                <span class="heatmap-keyword small">Space</span>
+            </div>
+            <h3>📧 Viral Digest</h3>
+            <input type="email" id="digest-email" placeholder="Enter your email">
+            <button id="subscribe-btn">Subscribe</button>
+            <h3>📊 Top Categories</h3>
+            <ul id="category-stats">
+                <li>News <span class="stat-count">45%</span></li>
+                <li>Videos <span class="stat-count">25%</span></li>
+                <li>Products <span class="stat-count">15%</span></li>
+                <li>Tweets <span class="stat-count">10%</span></li>
+                <li>Memes <span class="stat-count">5%</span></li>
+            </ul>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Viral Nexus. All rights reserved.</p>
+            <nav>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">API</a>
+                <a href="#">Submit Link</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
