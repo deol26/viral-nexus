@@ -16,6 +16,7 @@ This website loads viral content from a **links.json** file instead of requiring
 - **Infinite Scroll**: Load more content dynamically
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
 - **JSON-Based Management**: No admin panel needed - just edit links.json!
+- **Smart Image Selection**: Deterministic algorithm selects most relevant preview images based on content matching
 
 ## 📝 Managing Content
 
@@ -180,6 +181,90 @@ This is a static website prototype. For a full production version, consider:
 - User authentication system
 - Real-time updates
 - Advanced search with Elasticsearch
+
+## 🖼️ Smart Image Selection
+
+Viral Nexus uses an intelligent, deterministic algorithm to select the most relevant preview images for your links. This ensures that images are chosen based on actual content relevance rather than randomly.
+
+### How It Works
+
+The image selector scores each candidate image based on:
+
+1. **Filename matching** (60% weight): Compares image URL/filename tokens with link title and keywords
+2. **Alt text matching** (30% weight): Analyzes alt text and captions for relevance
+3. **Keyword tags** (40% weight): Matches explicit image keyword tags with link keywords
+4. **Resolution boost** (5% weight): Slight preference for higher-quality images
+
+### Image Sources (Priority Order)
+
+Images are selected from these sources in order of priority:
+1. `images` array in link JSON (highest priority)
+2. Open Graph (`og:image`) or Twitter meta tags
+3. First available page image
+4. Category-specific placeholder (fallback)
+
+### Enhanced Link JSON Format
+
+To take full advantage of the smart selector, you can optionally include detailed image metadata:
+
+```json
+{
+  "id": "1",
+  "title": "AI Breakthrough in Healthcare",
+  "url": "https://example.com/article",
+  "keywords": ["AI", "Healthcare", "Technology"],
+  "images": [
+    {
+      "url": "https://example.com/images/ai-healthcare-lab.jpg",
+      "alt": "AI technology in healthcare laboratory",
+      "caption": "Researchers using artificial intelligence",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "meta": {
+    "ogImage": "https://example.com/og-image.jpg",
+    "twitterImage": "https://example.com/twitter-image.jpg"
+  }
+}
+```
+
+**Note**: The basic link format still works! The selector intelligently falls back to available data. Your existing `thumbnail` field continues to work as before.
+
+### Performance & Caching
+
+- **In-memory cache**: Server-side selections are cached for fast repeated access
+- **localStorage cache**: Client-side persistence reduces redundant calculations
+- **Deterministic**: Same input always produces the same output for consistency
+
+### Customization
+
+To adjust selection behavior, modify `src/utils/imageSelector.js`:
+
+- **Weights**: Adjust `WEIGHTS` object to change scoring priorities
+- **Threshold**: Change `SCORE_THRESHOLD` (default: 0.05) to be more/less selective
+- **Stop words**: Add domain-specific terms to filter from matching
+
+Example:
+```javascript
+const WEIGHTS = {
+    filename: 0.7,      // Increase filename importance
+    altCaption: 0.2,    // Decrease alt text importance
+    keywordTag: 0.5,    // Increase keyword matching
+    resolution: 0.1     // Increase quality preference
+};
+```
+
+### Testing
+
+Run the test suite to verify image selection logic:
+
+**In Browser**: Open `tests/test-runner.html` in your browser and click "Run Tests"
+
+**In Node.js**: 
+```bash
+node tests/imageSelector.test.js
+```
 
 ## Troubleshooting
 
