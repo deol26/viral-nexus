@@ -427,7 +427,7 @@ function runTests() {
     
     console.log(`\n${passed + failed} tests, ${passed} passed, ${failed} failed`);
     
-    if (failed > 0) {
+    if (failed > 0 && typeof process !== 'undefined' && process.exit) {
         process.exit(1);
     }
 }
