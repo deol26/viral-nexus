@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     applyFilters();
     renderKeywordHeatmap();
     updateCategoryStats();
+    applyDarkMode(state.darkMode); // Initialize dark mode UI
 });
 
 async function loadLinksFromJSON() {
