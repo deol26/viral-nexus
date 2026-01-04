@@ -164,20 +164,24 @@ function renderLinks() {
 }
 
 function getRelevantThumbnail(link) {
-    // If link has a custom thumbnail that's not a random picsum photo, use it
-    if (link.thumbnail && !link.thumbnail.includes('picsum.photos')) {
+    // If link has a custom thumbnail, use it
+    if (link.thumbnail) {
         return link.thumbnail;
     }
     
     // Get the primary keyword or first keyword
     const keyword = link.keywords && link.keywords.length > 0 
         ? link.keywords[0] 
-        : link.category;
+        : link.title || link.category;
     
-    // Use Unsplash Source for relevant images based on keyword
-    // Format: https://source.unsplash.com/250x150/?keyword
-    const searchTerm = encodeURIComponent(keyword.toLowerCase());
-    return `https://source.unsplash.com/250x150/?${searchTerm}`;
+    // Use Picsum with a deterministic ID based on keyword for consistency
+    // This ensures same keyword always gets same image
+    const keywordHash = keyword.split('').reduce((acc, char) => {
+        return acc + char.charCodeAt(0);
+    }, 0);
+    const imageId = (keywordHash % 1000) + 1; // Range 1-1000
+    
+    return `https://picsum.photos/id/${imageId}/250/150`;
 }
 
 function formatTimeAgo(dateInput) {
