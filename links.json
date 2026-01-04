@@ -13,17 +13,17 @@
     "createdAt": "2026-01-03T00:00:00Z"
   },
   {
-    "id": "2",
-    "title": "Jon Hamm Dancing Trend Takes Over TikTok",
-    "url": "https://napoleoncat.com/blog/tiktok-trends/",
-    "description": "10M+ TikTok videos remix the viral Jon Hamm dance.",
-    "thumbnail": "https://picsum.photos/250/150?random=2",
-    "source": "TikTok Trends",
-    "viralScore": 88,
-    "keywords": ["JonHamm", "TikTok", "Dance"],
-    "category": "videos",
-    "clicks": 850000,
-    "createdAt": "2026-01-03T00:00:00Z"
+  "id": "14",
+  "title": "Live Football: Match updates, scores and commentary ",
+  "url": "https://www.bbc.com/sport/football/live/cdj8d4097k9t",
+  "description": "Live text updates, scores, team news and commentary for ongoing football matches on BBC Sport.",
+  "thumbnail": "images/football.jpg",
+  "source": "BBC Sport",
+  "viralScore": 80,
+  "keywords": ["Football", "Live", "Scores", "BBC Sport"],
+  "category": "news",
+  "clicks": 500000,
+  "createdAt": "2026-01-04T12:00:00Z"
   },
   {
     "id": "3",
@@ -130,6 +130,7 @@
     "createdAt": "2026-01-04T00:00:00Z"
   }
 ]
+
 
 
 
