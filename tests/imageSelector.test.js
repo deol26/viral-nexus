@@ -269,8 +269,9 @@ function runTests() {
     return true;
 }
 
-// Auto-run tests if in Node.js
-if (typeof require !== 'undefined' && require.main === module) {
+// Auto-run tests if in Node.js and script is run directly
+if (typeof require !== 'undefined' && typeof process !== 'undefined' && 
+    typeof __filename !== 'undefined' && __filename === process.argv[1]) {
     runTests();
 }
 

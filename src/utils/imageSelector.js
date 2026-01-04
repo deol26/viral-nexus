@@ -7,7 +7,7 @@
 const STOP_WORDS = new Set([
     'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from',
     'has', 'he', 'in', 'is', 'it', 'its', 'of', 'on', 'that', 'the',
-    'to', 'was', 'will', 'with', 'the', 'this', 'but', 'they', 'have',
+    'to', 'was', 'will', 'with', 'this', 'but', 'they', 'have',
     'had', 'what', 'when', 'where', 'who', 'which', 'why', 'how', 'over'
 ]);
 
@@ -21,6 +21,12 @@ const WEIGHTS = {
 
 // Minimum score threshold to accept an image
 const SCORE_THRESHOLD = 0.05;
+
+// Maximum pixels for resolution normalization (1 megapixel)
+const MAX_PIXELS_FOR_NORMALIZATION = 1000000;
+
+// Epsilon for floating-point comparison in tie-breaking
+const SCORE_EPSILON = 0.0001;
 
 // In-memory cache for image selections
 const selectionCache = new Map();
@@ -111,7 +117,7 @@ function scoreImage(image, titleTokens, keywordTokens) {
     // 4. Small resolution boost for higher quality images (weight 0.05)
     if (image.width && image.height) {
         const pixels = image.width * image.height;
-        const normalizedResolution = Math.min(pixels / 1000000, 1); // Normalize to 1MP max
+        const normalizedResolution = Math.min(pixels / MAX_PIXELS_FOR_NORMALIZATION, 1);
         score += normalizedResolution * WEIGHTS.resolution;
     }
     
@@ -224,7 +230,7 @@ function selectPreviewImage(linkJson, pageMeta = null, options = {}) {
     
     // Sort by score (descending), then by URL (lexicographic) for deterministic tie-breaking
     scoredCandidates.sort((a, b) => {
-        if (Math.abs(a.score - b.score) < 0.0001) {
+        if (Math.abs(a.score - b.score) < SCORE_EPSILON) {
             // Tie-breaker: lexicographically smallest URL
             return a.url.localeCompare(b.url);
         }
