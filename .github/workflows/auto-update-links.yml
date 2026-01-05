@@ -1,15 +1,16 @@
+# Auto-update viral links daily using AI
 name: Auto Update Viral Links
 
 on:
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '0 */6 * * *'  # Run every 6 hours
   workflow_dispatch:
 
 jobs:
   update-links:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write  # Allow pushing changes
     
     steps:
     - uses: actions/checkout@v3
