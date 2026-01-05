@@ -1,5 +1,54 @@
 [
   {
+    "id": 1767622875532,
+    "title": "Breaking: Major Tech Announcement",
+    "url": "https://techcrunch.com",
+    "description": "Trending on r/technology",
+    "thumbnail": "https://picsum.photos/id/592/250/150",
+    "source": "r/technology",
+    "viralScore": 50,
+    "keywords": [
+      "Breaking:",
+      "Major",
+      "Announcement"
+    ],
+    "category": "news",
+    "clicks": 50000,
+    "createdAt": "2026-01-05T14:21:15.532Z"
+  },
+  {
+    "id": 1767622875533,
+    "title": "Viral TikTok Dance Challenge",
+    "url": "https://tiktok.com",
+    "description": "Trending on r/videos",
+    "thumbnail": "https://picsum.photos/id/441/250/150",
+    "source": "r/videos",
+    "viralScore": 80,
+    "keywords": [
+      "Viral",
+      "TikTok",
+      "Dance"
+    ],
+    "category": "videos",
+    "clicks": 80000,
+    "createdAt": "2026-01-05T14:21:15.532Z"
+  },
+  {
+    "id": 1767622875534,
+    "title": "New AI Tool Goes Viral",
+    "url": "https://openai.com",
+    "description": "Trending on r/artificial",
+    "thumbnail": "https://picsum.photos/id/636/250/150",
+    "source": "r/artificial",
+    "viralScore": 60,
+    "keywords": [
+      "Viral"
+    ],
+    "category": "news",
+    "clicks": 60000,
+    "createdAt": "2026-01-05T14:21:15.532Z"
+  },
+  {
     "id": "1",
     "title": "World Reacts to US Military Action in Venezuela",
     "url": "https://www.aljazeera.com/news/2026/1/3/world-reacts-to-reported-us-bombing-of-venezuela",
