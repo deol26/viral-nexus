@@ -7,23 +7,32 @@
     "thumbnail": "images/venzu.avif",
     "source": "Al Jazeera",
     "viralScore": 95,
-    "keywords": ["Venezuela", "Geopolitics", "Breaking"],
+    "keywords": [
+      "Venezuela",
+      "Geopolitics",
+      "Breaking"
+    ],
     "category": "news",
     "clicks": 2500000,
     "createdAt": "2026-01-03T00:00:00Z"
   },
   {
-  "id": "14",
-  "title": "Live Football: Match updates, scores and commentary ",
-  "url": "https://www.bbc.com/sport/football/live/cdj8d4097k9t",
-  "description": "Live text updates, scores, team news and commentary for ongoing football matches on BBC Sport.",
-  "thumbnail": "images/football.jpg",
-  "source": "BBC Sport",
-  "viralScore": 80,
-  "keywords": ["Football", "Live", "Scores", "BBC Sport"],
-  "category": "news",
-  "clicks": 500000,
-  "createdAt": "2026-01-04T12:00:00Z"
+    "id": "14",
+    "title": "Live Football: Match updates, scores and commentary ",
+    "url": "https://www.bbc.com/sport/football/live/cdj8d4097k9t",
+    "description": "Live text updates, scores, team news and commentary for ongoing football matches on BBC Sport.",
+    "thumbnail": "images/football.jpg",
+    "source": "BBC Sport",
+    "viralScore": 80,
+    "keywords": [
+      "Football",
+      "Live",
+      "Scores",
+      "BBC Sport"
+    ],
+    "category": "news",
+    "clicks": 500000,
+    "createdAt": "2026-01-04T12:00:00Z"
   },
   {
     "id": "3",
@@ -33,7 +42,11 @@
     "thumbnail": "https://picsum.photos/250/150?random=3",
     "source": "Exploding Topics",
     "viralScore": 82,
-    "keywords": ["Skincare", "Beauty", "TikTokMadeMeBuyIt"],
+    "keywords": [
+      "Skincare",
+      "Beauty",
+      "TikTokMadeMeBuyIt"
+    ],
     "category": "products",
     "clicks": 450000,
     "createdAt": "2026-01-02T00:00:00Z"
@@ -46,7 +59,11 @@
     "thumbnail": "https://picsum.photos/250/150?random=4",
     "source": "Twitter",
     "viralScore": 90,
-    "keywords": ["ElonMusk", "SpaceX", "Twitter"],
+    "keywords": [
+      "ElonMusk",
+      "SpaceX",
+      "Twitter"
+    ],
     "category": "tweets",
     "clicks": 720000,
     "createdAt": "2026-01-02T00:00:00Z"
@@ -59,7 +76,11 @@
     "thumbnail": "https://picsum.photos/250/150?random=5",
     "source": "Reddit",
     "viralScore": 78,
-    "keywords": ["Meme", "AI", "Viral"],
+    "keywords": [
+      "Meme",
+      "AI",
+      "Viral"
+    ],
     "category": "memes",
     "clicks": 400000,
     "createdAt": "2026-01-01T00:00:00Z"
@@ -72,7 +93,11 @@
     "thumbnail": "https://picsum.photos/250/150?random=6",
     "source": "BBC Technology",
     "viralScore": 85,
-    "keywords": ["AI", "Technology", "Future"],
+    "keywords": [
+      "AI",
+      "Technology",
+      "Future"
+    ],
     "category": "news",
     "clicks": 1200000,
     "createdAt": "2026-01-01T00:00:00Z"
@@ -85,7 +110,11 @@
     "thumbnail": "https://picsum.photos/250/150?random=7",
     "source": "YouTube Trending",
     "viralScore": 80,
-    "keywords": ["YouTube", "Deepfake", "Creators"],
+    "keywords": [
+      "YouTube",
+      "Deepfake",
+      "Creators"
+    ],
     "category": "videos",
     "clicks": 950000,
     "createdAt": "2026-01-01T00:00:00Z"
@@ -98,7 +127,11 @@
     "thumbnail": "https://picsum.photos/250/150?random=8",
     "source": "Amazon Best Sellers",
     "viralScore": 75,
-    "keywords": ["Amazon", "Food", "Dessert"],
+    "keywords": [
+      "Amazon",
+      "Food",
+      "Dessert"
+    ],
     "category": "products",
     "clicks": 550000,
     "createdAt": "2025-12-31T00:00:00Z"
@@ -111,7 +144,11 @@
     "thumbnail": "images/19min.jpeg",
     "source": "Instagram",
     "viralScore": 76,
-    "keywords": ["19 minutes", "viral video", "Instagram"],
+    "keywords": [
+      "19 minutes",
+      "viral video",
+      "Instagram"
+    ],
     "category": "videos",
     "clicks": 300000,
     "createdAt": "2026-01-04T00:00:00Z"
@@ -124,14 +161,14 @@
     "thumbnail": "images/lotto.jpg",
     "source": "NextDraws",
     "viralScore": 68,
-    "keywords": ["lottery", "predictions", "Mega Millions", "Oz Lotto"],
+    "keywords": [
+      "lottery",
+      "predictions",
+      "Mega Millions",
+      "Oz Lotto"
+    ],
     "category": "tools",
     "clicks": 120000,
     "createdAt": "2026-01-04T00:00:00Z"
   }
 ]
-
-
-
-
-
